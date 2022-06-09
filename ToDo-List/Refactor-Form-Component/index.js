@@ -11,25 +11,24 @@ function App(){
     {
       text: 'build todo app',
       isCompleted: false,
-    }        
+    }
   ]);
 
   const addTodo = text => {
     const newTodos = [...todos, {text, isCompleted:false}];
     setTodos(newTodos);
   }
-  const removeTodo = e => {
-    var index = Number(e.target.id);
-    let temp = [...todos];    
+
+  const removeTodo = index => {
+    let temp = [...todos];
     temp.splice(index, 1);
     setTodos(temp);
   }
 
   return(
     <>
-      {todos.map((todo, i) => (
-        <div className="todo" key={i} id={i} onClick={removeTodo}>{todo.text}</div>
-      ))}
+      {todos.map((todo, i) =>
+        <Todo index={i} key={i} todo={todo} remove={removeTodo}/>)}
       <TodoForm addTodo={addTodo} />
     </>
   );
